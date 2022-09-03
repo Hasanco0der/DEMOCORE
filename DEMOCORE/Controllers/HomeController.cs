@@ -25,6 +25,7 @@ namespace DEMOCORE.Controllers
 
         public IActionResult Privacy()
         {
+            int i = 0;
             return View();
         }
 
