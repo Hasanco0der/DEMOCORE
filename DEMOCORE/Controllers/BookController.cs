@@ -21,9 +21,10 @@ namespace DEMOCORE.Controllers
             return View(data);
         }
 
-        public Book GetByID(int id)
+        public ViewResult GetByID(int id)
         {
-           return _bookRepository.GetBookByID(id);
+           var data= _bookRepository.GetBookByID(id);
+            return View(data);
         }
         public List<Book> Search(string title,string author)
         {
