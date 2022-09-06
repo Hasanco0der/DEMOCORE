@@ -27,11 +27,12 @@ namespace DEMOCORE.Repository
         {
             return new List<Book>()
             {
-                new Book(){ID=1,Title="Mvc",Author="Hasan"},
-                new Book(){ID=2,Title="python",Author="Ali"},
-                new Book(){ID=3,Title="pip",Author="Omar"},
-                new Book(){ID=4,Title="java",Author="jwad"},
-                new Book(){ID=5,Title="Asp",Author="hussain"},
+                new Book(){ID=1,Title="Mvc",Author="Hasan",Des="Tis Description For Mvc Book"},
+                new Book(){ID=2,Title="Python",Author="Ali",Des="Tis Description For Python Book"},
+                new Book(){ID=3,Title="PHP",Author="Omar",Des="Tis Description For Php Book"},
+                new Book(){ID=4,Title="Java",Author="jwad",Des="Tis Description For Java Book"},
+                new Book(){ID=5,Title="ASP",Author="hussain",Des="Tis Description For ASP Book"},
+                new Book(){ID=66,Title="الحياة بلا مكان",Author="حسن الموسوي",Des="كتـــاب بــــلا معنــــى"},
             };
         }
     }
