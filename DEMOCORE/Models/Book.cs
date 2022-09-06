@@ -5,8 +5,12 @@ using System.Threading.Tasks;
 
 namespace DEMOCORE.Models
 {
-    public class Admin
+    public class Book
     {
         public int ID { get; set; }
+
+        public string Title { get; set; }
+        public string Author { get; set; }
+
     }
 }
