@@ -1,7 +1,7 @@
-﻿@using DEMOCORE.Models
+﻿
 @model IEnumerable<Book>
 @{
-    ViewData["Title"] = "GetAllBooks";
+    ViewData["Title"] = "List Books";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -30,7 +30,7 @@
                         <p class="card-text">@book.Des</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="/book/GetByID/@book.ID" class="btn btn-sm btn-outline-secondary">View Detailes</a>
+                                <a asp-route="bookdetailsroute" asp-fragment="IDBook"  asp-route-ID="@book.ID" class="btn btn-sm btn-outline-secondary">View Detailes</a>
                             </div>
                             <small class="text-muted">@book.Author</small>
                         </div>

@@ -1,7 +1,9 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
@@ -24,13 +26,13 @@
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/home/index">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" asp-controller="home" asp-action="index">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/home/privacy">Privacy</a>
+                        <a class="nav-link"asp-controller="home" asp-action="Privacy">Privacy</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/book/GetAllBooks">GetAllBooks</a>
+                        <a class="nav-link" href="/book/GetAllBooks">All Books</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">

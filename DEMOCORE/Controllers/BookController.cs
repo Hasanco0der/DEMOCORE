@@ -15,22 +15,28 @@ namespace DEMOCORE.Controllers
         {
             _bookRepository = new BookRepository();
         }
-       public ViewResult GetAllBooks()
+        public ViewResult GetAllBooks()
         {
-            var data=_bookRepository.GetAllBooks();
+            var data = _bookRepository.GetAllBooks();
             return View(data);
         }
 
+        [Route("book-details{id}",Name ="bookdetailsroute")]
         public ViewResult GetByID(int id)
         {
            var data= _bookRepository.GetBookByID(id);
             return View(data);
         }
-        public List<Book> Search(string title,string author)
+        public ViewResult Search(string title,string author)
         {
-            return _bookRepository.SearchBook(title, author);
+           var data= _bookRepository.SearchBook(title, author);
+            return View(data);
         }
 
+        public ViewResult aa()
+        {
+            return View();
+        }
 
     }
 }
