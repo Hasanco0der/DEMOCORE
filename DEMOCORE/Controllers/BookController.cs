@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DEMOCORE.Models;
 using DEMOCORE.Repository;
 using Microsoft.AspNetCore.Mvc;
+using DEMOCORE.Data;
 
 namespace DEMOCORE.Controllers
 {
@@ -33,7 +34,13 @@ namespace DEMOCORE.Controllers
             return View(data);
         }
 
-        public ViewResult aa()
+        public ViewResult AddNewBook()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddNewBook(books book)
         {
             return View();
         }
