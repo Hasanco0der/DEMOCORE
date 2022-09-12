@@ -1,4 +1,5 @@
-﻿using DEMOCORE.Models;
+﻿using DEMOCORE.Data;
+using DEMOCORE.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,32 @@ namespace DEMOCORE.Repository
 {
     public class BookRepository
     {
-        public List<Book> GetAllBooks()
+        private readonly BookStoreContext _context = null;
+
+        public BookRepository(BookStoreContext context)
         {
-            return DataSource();
+            _context = context;
+        }
+
+        public int Addnewbook(books model)
+        {
+            var newbook = new books()
+            {
+                Title=model.Title,
+                Author=model.Author,
+                Category=model.Category,
+                Des=model.Des,
+                Totalpages=model.Totalpages,
+                Language=model.Language
+            };
+            _context.books.Add(newbook);
+            _context.SaveChanges();
+
+            return newbook.ID;
+        }
+        public List<books> GetAllBooks()
+        {
+            return _context.books.ToList() ;
         }
 
         public Book GetBookByID(int id)

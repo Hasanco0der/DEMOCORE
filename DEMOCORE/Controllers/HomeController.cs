@@ -23,6 +23,11 @@ namespace DEMOCORE.Controllers
             return View();
         }
 
+        public IActionResult Indexx()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             int i = 0;
