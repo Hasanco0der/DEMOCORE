@@ -32,7 +32,7 @@ namespace DEMOCORE
             services.AddControllersWithViews();
             services.AddRazorPages().AddRazorRuntimeCompilation();
 
-            services.AddScoped<BookRepository, BookRepository>(); 
+            services.AddScoped<IBookRepository, BookRepository> (); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

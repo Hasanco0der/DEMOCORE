@@ -1,5 +1,6 @@
 ﻿using DEMOCORE.Data;
 using DEMOCORE.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DEMOCORE.Repository
 {
-    public class BookRepository
+    public class BookRepository: IBookRepository
     {
         private readonly BookStoreContext _context = null;
 
@@ -16,48 +17,61 @@ namespace DEMOCORE.Repository
             _context = context;
         }
 
-        public int Addnewbook(books model)
+
+
+        public async Task<int> AddNewBook(Book model)
         {
-            var newbook = new books()
+            var newBook = new books()
             {
-                Title=model.Title,
-                Author=model.Author,
+                Author = model.Author,
+                Des = model.Des,
+                Title = model.Title,
                 Category=model.Category,
-                Des=model.Des,
-                Totalpages=model.Totalpages,
-                Language=model.Language
+                Language = model.Language,
+                Totalpages = model.Totalpages,
+                CoverImageUrl = model.CoverImageUrl
+               
             };
-            _context.books.Add(newbook);
-            _context.SaveChanges();
 
-            return newbook.ID;
-        }
-        public List<books> GetAllBooks()
-        {
-            return _context.books.ToList() ;
+            await _context.books.AddAsync(newBook);
+            await _context.SaveChangesAsync();
+
+            return newBook.ID;
         }
 
-        public Book GetBookByID(int id)
+        public async Task<List<Book>> GetAllBooks()
         {
-            return DataSource().Where(x => x.ID == id).FirstOrDefault();
+            return await _context.books
+                 .Select(book => new Book()
+                 {
+                     Author = book.Author,
+                     Category = book.Category,
+                     Des = book.Des,
+                     ID = book.ID,
+                     Language = book.Language,
+                     Title = book.Title,
+                     Totalpages = book.Totalpages,
+                     CoverImageUrl = book.CoverImageUrl
+                 }).ToListAsync();
         }
 
-        public List<Book> SearchBook(string Tittle,string Author)
-        {
-            return DataSource().Where(x => x.Title.Contains(Tittle) || x.Author.Contains(Author)).ToList();
-        }
+      
 
-        private List<Book> DataSource()
+        public async Task<Book> GetBookById(int id)
         {
-            return new List<Book>()
-            {
-                new Book(){ID=1,Title="Mvc",Author="Hasan",Des="Tis Description For Mvc Book",Category="Asp Core",Language="English",Totalpages=165},
-                new Book(){ID=2,Title="Python",Author="Ali",Des="Tis Description For Python Book",Category="py toturial",Language="Arbic",Totalpages=234},
-                new Book(){ID=3,Title="PHP",Author="Omar",Des="Tis Description For Php Book",Category="Php pop",Language="hinde",Totalpages=432},
-                new Book(){ID=4,Title="Java",Author="jwad",Des="Tis Description For Java Book",Category="Java Script",Language="English",Totalpages=89},
-                new Book(){ID=5,Title="ASP",Author="hussain",Des="Tis Description For ASP Book",Category=".Net Core",Language="Chines",Totalpages=123},
-                new Book(){ID=66,Title="الحياة بلا مكان",Author="حسن الموسوي",Des="كتـــاب بــــلا معنــــى",Category="Asp Core",Language="English",Totalpages=165},
-            };
+            return await _context.books.Where(x => x.ID == id)
+                 .Select(book => new Book()
+                 {
+                     Author = book.Author,
+                     Category = book.Category,
+                     Des = book.Des,
+                     ID = book.ID,
+                     Language = book.Language,
+                     Title = book.Title,
+                     Totalpages = book.Totalpages,
+                     CoverImageUrl = book.CoverImageUrl,
+                 }).FirstOrDefaultAsync();
         }
+       
     }
 }

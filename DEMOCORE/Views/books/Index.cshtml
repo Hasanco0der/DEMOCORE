@@ -1,71 +1,93 @@
-﻿@model IEnumerable<DEMOCORE.Data.books>
+﻿@model IEnumerable<DEMOCORE.Models.Book>
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a asp-controller="books" asp-action="index">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">List Books</li>
-    </ol>
+    <nav class="breadcrumbs">
+        <a asp-controller="home" asp-action="index" class="breadcrumbs__item">Home</a>
+        <a asp-controller="books" asp-action="index" class="breadcrumbs__item">List Book</a>
+    </nav>
 </nav>
+<hr />
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Des)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Totalpages)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Language)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Des)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Totalpages)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Language)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+
+    
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Author Name
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Total pages
+                    </th>
+                    <th>
+                        Language
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Des)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Totalpages)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Language)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm bg-success-light">
+                            <i class="fas fa-edit"></i> تعديل
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm bg-info-light">
+                            <i class="far fa-eye"></i> عرض التفاصيل
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm bg-danger-light">
+                            <i class="fas fa-times"></i> حـذف
+                        </a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    
+
+
+
+
+

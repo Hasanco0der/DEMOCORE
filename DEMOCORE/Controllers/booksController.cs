@@ -6,22 +6,31 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DEMOCORE.Data;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using DEMOCORE.Repository;
+using DEMOCORE.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace DEMOCORE.Controllers
 {
     public class booksController : Controller
     {
         private readonly BookStoreContext _context;
+        private readonly IBookRepository _bookRepository = null;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public booksController(BookStoreContext context)
+        public booksController(BookStoreContext context, IWebHostEnvironment webHostEnvironment, IBookRepository bookRepository)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
+            _bookRepository = bookRepository; 
         }
 
         // GET: books
-        public async Task<IActionResult> Index()
+        public async Task<ViewResult> Index()
         {
-            return View(await _context.books.ToListAsync());
+            return View(await _bookRepository.GetAllBooks());
         }
 
         // GET: books/Details/5
@@ -55,14 +64,20 @@ namespace DEMOCORE.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title,Author,Des,Category,Totalpages,Language")] books books)
+        public async Task<IActionResult> Create( Book books)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(books);
-                int idd=books.ID;
-                await _context.SaveChangesAsync();      
-                return RedirectToAction(nameof(Create), new { isSuccess = true, bookId=idd });     
+                if (books.CoverPhoto != null)
+                {
+                    string folder = "books/cover/";
+                    books.CoverImageUrl = await UploadImage(folder, books.CoverPhoto);
+                }
+                int id = await _bookRepository.AddNewBook(books);
+                if (id > 0)
+                {
+                    return RedirectToAction(nameof(Create), new { isSuccess = true, bookId = id });
+                }
             }
             return View(books);
         }
@@ -99,6 +114,7 @@ namespace DEMOCORE.Controllers
             {
                 try
                 {
+
                     _context.Update(books);
                     await _context.SaveChangesAsync();
                 }
@@ -150,6 +166,18 @@ namespace DEMOCORE.Controllers
         private bool booksExists(int id)
         {
             return _context.books.Any(e => e.ID == id);
+        }
+
+        private async Task<string> UploadImage(string folderPath, IFormFile file)
+        {
+
+            folderPath += Guid.NewGuid().ToString() + "_" + file.FileName;
+
+            string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folderPath);
+
+            await file.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+
+            return "/" + folderPath;
         }
     }
 }

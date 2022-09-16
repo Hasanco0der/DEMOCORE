@@ -1,22 +1,28 @@
-﻿@model DEMOCORE.Data.books
+﻿@model DEMOCORE.Models.Book
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
+<!--This is breadcrumbs items -->
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a asp-controller="books" asp-action="index">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Add Book</li>
-    </ol>
+    <nav class="breadcrumbs">
+        <a asp-controller="home" asp-action="index" class="breadcrumbs__item">Home</a>
+        <a asp-controller="books" asp-action="index" class="breadcrumbs__item">List Book</a>
+        <a asp-controller="books" asp-action="Create" class="breadcrumbs__item">Add Book</a>
+    </nav>
 </nav>
 <hr />
 
+
+<!--This is alert message -->
 @if (ViewBag.IsSuccess == true)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Congratulations</strong> You have added new book successfully. 
+        <strong>Congratulations</strong> You have added new book successfully.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -24,14 +30,29 @@
 }
 
 
-    <div class="container">
-        <div class="row">
-            
-            <form asp-action="Create" class="needs-validation" novalidate>
+
+<!--This is Spinners-->
+<div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status" id="myloader" style="display:none">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<!--This is Forms-->
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Book Table</h4>
+            <p class="card-description"> Basic Book Information </p>
+            <form method="post" enctype="multipart/form-data" class="forms-sample" asp-action="Create">
+
+                @*data-ajax="true" data-ajax-loading="#myloader"*@
+
+                <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-row">
                     <div class="col-md-4 mb-3">
                         <label asp-for="Title"></label>
-                        <input asp-for="Title" class="form-control" placeholder="Title Book" required />
+                        <input asp-for="Title" class="form-control" placeholder="Title Book" />
                         <span asp-validation-for="Title" class="text-danger"></span>
                         <div class="valid-tooltip">
                             Looks good!
@@ -39,7 +60,7 @@
                     </div>
                     <div class="col-md-4 mb-3">
                         <label asp-for="Author" for="validationTooltip02"></label>
-                        <input asp-for="Author" class="form-control" id="validationTooltip02" placeholder="Author Book" required />
+                        <input asp-for="Author" class="form-control" id="validationTooltip02" placeholder="Author Book" />
                         <span asp-validation-for="Author" class="text-danger"></span>
                         <div class="valid-tooltip">
                             Looks good!
@@ -59,7 +80,7 @@
                 <div class="form-row">
                     <div class="col-md-4 mb-3">
                         <label asp-for="Category" class="control-label" for="validationTooltip04"></label>
-                        <input asp-for="Category" class="form-control" id="validationTooltip04" placeholder="Category" required>
+                        <input asp-for="Category" class="form-control" id="validationTooltip04" placeholder="Category">
                         <span asp-validation-for="Category" class="text-danger"></span>
                         <div class="invalid-tooltip">
                             Please provide a valid Category.
@@ -67,7 +88,8 @@
                     </div>
                     <div class="col-md-8 mb-3">
                         <label asp-for="Language" class="control-label" for="validationTooltip05"></label>
-                        <select asp-for="Language" class="form-control" id="validationTooltip04" placeholder="Language">
+                        <select asp-for="Language" class="form-control" id="validationTooltip04" placeholder="Language" required>
+                            <option value="">--Chose Language--</option>
                             <option>English</option>
                             <option>China</option>
                             <option>Dutch</option>
@@ -78,16 +100,27 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                        <label asp-for="Des" class="control-label" for="validationTooltipUsername">Description</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="validationTooltipUsernamePrepend">Description</span>
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group green-border-focus">
+                            <label asp-for="CoverPhoto" class="control-label"></label>
+                            <div class="custom-file">
+                                <input asp-for="CoverPhoto" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Choose file</label>
                             </div>
-                            <textarea asp-for="Des" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend"></textarea>
-                            <span asp-validation-for="Des" class="text-danger"></span>
+                            <span asp-validation-for="CoverPhoto" class="text-danger"></span>
                         </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                        <div class="form-group green-border-focus">
+                            <label asp-for="Des" class="control-label" for="exampleFormControlTextarea5">Description</label>
+                            <textarea asp-for="Des" class="form-control" placeholder="Description Here !" id="exampleFormControlTextarea5" rows="3"></textarea>
+                        </div>
+
                     </div>
                 </div>
                 <div class="form-group">
@@ -95,7 +128,6 @@
                     <a asp-action="Index" class="btn btn-outline-dark">Back to List</a>
                 </div>
             </form>
-                </div>
+        </div>
+    </div>
 </div>
-
-

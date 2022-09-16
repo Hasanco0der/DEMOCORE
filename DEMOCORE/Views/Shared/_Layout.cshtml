@@ -10,15 +10,24 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Book Store - Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="~/Assetss/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
 
+    <!--To Table Bootstrab Style-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+
+    <!--To Breadcrumb Style-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="~/css/Style.css">
+
     <!-- Custom styles for this template-->
     <link href="~/Assetss/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
 
 </head>
 
@@ -31,11 +40,15 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-controller="home" asp-action="index">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <lord-icon src="https://cdn.lordicon.com/wxnxiano.json"
+                               trigger="morph"
+                               colors="primary:#e8e230,secondary:#ffffff"
+                               style="width:45px;height:95px">
+                    </lord-icon>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Book Store</div>
             </a>
 
             <!-- Divider -->
@@ -365,7 +378,6 @@
 
                 </nav>
                 <!-- End of Topbar -->
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     @RenderBody()
@@ -398,13 +410,13 @@
                 </div>
             </div>
 
-            
-          
-            
+
+
+
             <!-- Bootstrap core JavaScript-->
             <script src="~/Assetss/vendor/jquery/jquery.min.js"></script>
             <script src="~/Assetss/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+            <script src="~/lib/jquery/jquery.js"></script>
             <!-- Core plugin JavaScript-->
             <script src="~/Assetss/vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -413,10 +425,14 @@
 
             <!-- Page level plugins -->
             <script src="~/Assetss/vendor/chart.js/Chart.min.js"></script>
-
+            <script src="~/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
             <!-- Page level custom scripts -->
             <script src="~/Assetss/js/demo/chart-area-demo.js"></script>
             <script src="~/Assetss/js/demo/chart-pie-demo.js"></script>
+            <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+            <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+            <script src="~/Assetss/js/app.js"></script>
 
 </body>
 

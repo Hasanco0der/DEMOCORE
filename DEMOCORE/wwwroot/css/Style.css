@@ -1,0 +1,118 @@
+﻿.breadcrumbs {
+    border: 1px solid #cbd2d9;
+    border-radius: 0.3rem;
+    display: inline-flex;
+    overflow: hidden;
+}
+
+.breadcrumbs__item {
+    background: #fff;
+    color: #333;
+    outline: none;
+    padding: 0.75em 0.75em 0.75em 1.25em;
+    position: relative;
+    text-decoration: none;
+    transition: background 0.2s linear;
+}
+
+    .breadcrumbs__item:hover:after,
+    .breadcrumbs__item:hover {
+        background: #edf1f5;
+    }
+
+    .breadcrumbs__item:focus:after,
+    .breadcrumbs__item:focus,
+    .breadcrumbs__item.is-active:focus {
+        background: #323f4a;
+        color: #fff;
+    }
+
+    .breadcrumbs__item:after,
+    .breadcrumbs__item:before {
+        background: white;
+        bottom: 0;
+        -webkit-clip-path: polygon(50% 50%, -50% -50%, 0 100%);
+        clip-path: polygon(50% 50%, -50% -50%, 0 100%);
+        content: "";
+        left: 100%;
+        position: absolute;
+        top: 0;
+        transition: background 0.2s linear;
+        width: 1em;
+        z-index: 1;
+    }
+
+.breadcrumbs__item:before {
+        background: #cbd2d9;
+        margin-left: 1px;
+    }
+
+    .breadcrumbs__item:last-child {
+         background: #323f4a;
+         color: #fff;
+    }
+
+    .breadcrumbs__item.is-active {
+        background: #edf1f5;
+    }
+.breadcrumbs {
+    border: 1px solid #cbd2d9;
+    border-radius: 0.3rem;
+    display: inline-flex;
+    overflow: hidden;
+}
+
+
+
+    .breadcrumbs__item:hover:after,
+    .breadcrumbs__item:hover {
+        background: #edf1f5;
+        color:#000000;
+    }
+
+
+
+.bg-info-light {
+    background-color: rgba(2, 182, 179,0.12) !important;
+    color: #1db9aa !important;
+}
+
+.btn-group-sm > .btn, 
+.btn-sm {
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
+
+input, button, a {
+    transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    -webkit-transition: all 0.4s ease;
+}
+
+.bg-danger-light {
+    background-color: rgba(242, 17, 54,0.12) !important;
+    color: #e63c3c !important;
+}
+
+.btn-group-sm > .btn, .btn-sm {
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
+
+.bg-success-light {
+    background-color: rgba(15, 183, 107,0.12) !important;
+    color: #26af48 !important;
+}
+
+.btn-sm {
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
